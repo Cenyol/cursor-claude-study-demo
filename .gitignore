@@ -1,0 +1,32 @@
+# ----- 1. Go 相关 -----
+/bin/
+*.exe
+*.dll
+__debug_bin
+vendor/
+go.work
+
+# ----- 2. Python & 测试相关 -----
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ----- 3. 环境与敏感信息 (CRITICAL) -----
+.env
+config.yaml
+*.log
+logs/
+.idea/
+.vscode/
+
+# ----- 4. 数据库与本地存储 -----
+*.db
+*.sqlite
+.DS_Store
+Thumbs.db

@@ -1,0 +1,28 @@
+---
+alwaysApply: true
+description: 针对 Go + Python 项目的 Git 忽略与安全规范
+globs: .gitignore, **/*
+---
+# .gitignore 强制规范
+当初始化项目或添加新组件时，Agent 必须确保 `.gitignore` 包含以下分类，严禁将此类文件提交至版本控制：
+
+## 1. Go 相关
+- **二进制文件**: `/bin/`, `*.exe`, `*.dll`, `__debug_bin`
+- **依赖与缓存**: `vendor/` (除非明确要求), `go.work`
+
+## 2. Python & 测试相关
+- **虚拟环境**: `.venv/`, `venv/`, `env/`, `ENV/`
+- **缓存与编译**: `__pycache__/`, `*.py[cod]`, `.pytest_cache/`, `.coverage`, `htmlcov/`
+
+## 3. 环境与敏感信息 (CRITICAL)
+- **配置文件**: `.env`, `config.yaml` (仅保留 `config.yaml.example`)
+- **日志**: `*.log`, `logs/`
+- **IDE**: `.idea/`, `.vscode/` (但允许保留 `.cursor/rules/`)
+
+## 4. 数据库与本地存储
+- **本地数据**: `*.db`, `*.sqlite`
+- **临时文件**: `.DS_Store` (macOS), `Thumbs.db` (Windows)
+
+# 安全准则
+- **禁止提交密钥**：若发现代码中包含明文的数据库密码、Redis 密钥或 JWT Secret，Agent 必须提示用户将其移动到环境变量或 `.env` 文件中。
+- **示例模板**：项目根目录必须提供 `.env.example`，列出所有必要的配置项但不包含真实值。

@@ -18,6 +18,12 @@ async def client():
     async with httpx.AsyncClient(base_url=BASE_URL, timeout=10.0) as c:
         yield c
 
+
+@pytest.fixture(scope="session")
+async def api_client(client):
+    """规范要求的 api_client fixture，与 client 共用同一客户端"""
+    yield client
+
 @pytest.fixture
 async def auth_client(client):
     """
