@@ -1,0 +1,28 @@
+---
+description: Go 语言规范、错误处理及 DDD 编码细节
+alwaysApply: true
+globs: **/*.go
+---
+# 编码风格
+- 遵循标准 [Uber Go Style Guide](https://github.com)。
+- 命名：包名简短小写，结构体采用 PascalCase。
+
+# 错误处理规范 (CRITICAL)
+- 禁止忽略错误。
+- 统一返回 JSON 格式：`{"code": int, "data": any, "msg": string}`。
+- 业务错误码与 HTTP 状态码分离。
+
+# 高并发与 DB 规范
+- **DB**: 必须在 `init` 中配置 GORM 连接池 (`SetMaxIdleConns`, `SetMaxOpenConns`)。
+- **并发**: 用户登录/注册需考虑缓存穿透，使用 Redis 预热或布隆过滤器（如需求提及）。
+- **密码**: 严禁明文存储，必须使用 `bcrypt` 硬件加固哈希。
+- **事务**: 注册流程涉及多表操作时必须使用 `db.Transaction`。
+
+# DDD 编码规范
+- **充血模型**: 业务逻辑应尽可能留在 Domain Entity 中，而非全部堆在 Service。
+- **工厂模式**: 复杂实体的创建应使用 `NewUser(...)` 工厂方法。
+- **DTO 转换**: Handler 与 Application 层之间使用 DTO，Application 与 Domain 之间转换为 Entity。
+
+# 持续集成 (CI) 友好
+- 每个 Domain Service 必须有对应的 `_test.go` 文件，使用 Mock 进行单元测试。
+- 确保代码结构支持 `go test ./internal/...` 一键运行。

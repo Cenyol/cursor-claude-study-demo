@@ -1,0 +1,30 @@
+---
+description: 领域驱动设计 (DDD) 架构分层与依赖规范
+globs: internal/**/*.go
+alwaysApply: true
+---
+# DDD 分层架构要求
+必须严格遵守以下四层模型，禁止跨层依赖：
+
+1. **接口层 (Interfaces/Handlers)**:
+   - 负责处理 HTTP 请求/响应，验证输入参数。
+   - 目录: `internal/interfaces/http`
+
+2. **应用层 (Application)**:
+   - 负责编排业务流程，不含业务逻辑。调用 Domain Service 或 Repository。
+   - 目录: `internal/application`
+
+3. **领域层 (Domain) - 核心**:
+   - 包含实体 (Entities)、值对象 (Value Objects) 和领域服务 (Domain Services)。
+   - **禁止依赖外层**（如数据库或框架）。
+   - 目录: `internal/domain`
+
+4. **基础设施层 (Infrastructure)**:
+   - 负责持久化 (GORM/MySQL)、缓存 (Redis) 和外部通信。
+   - 实现 Domain 层定义的 Repository 接口。
+   - 目录: `internal/infrastructure`
+
+# 依赖倒置原则 (DIP)
+- Domain 层定义 Repository 接口。
+- Infrastructure 层实现该接口。
+- 使用构造函数进行依赖注入，确保各层易于进行单元测试。

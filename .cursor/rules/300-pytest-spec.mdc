@@ -1,0 +1,24 @@
+---
+alwaysApply: true
+description: Pytest 接口黑盒测试编写规范
+globs: tests/**/*.py
+---
+# 测试框架要求
+- 使用 `pytest` 配合 `pytest-asyncio`。
+- 必须在 `tests/conftest.py` 中定义 `api_client` fixture。
+
+# 测试用例覆盖
+- **正向路径**: 注册 -> 登录 -> 获取信息 -> 退出。
+- **逆向路径**: 重复注册、错误密码登录、未登录调用退出接口。
+- **校验**: 使用 `assert response.status_code == 200` 及 `pydantic` 模型校验返回结构。
+
+# 运行提示
+- 提醒用户使用 `python3 -m pytest` 运行测试以避免路径问题。
+
+# 环境自愈与依赖管理
+- **虚拟环境优先**：在执行任何 Python 测试前，Agent 必须检查当前目录下是否存在 `.venv`。
+- **缺失处理**：若 `pytest` 报错 `command not found`，Agent 应主动执行以下序列：
+  1. `python3 -m venv .venv`
+  2. `source .venv/bin/activate` (macOS/Linux) 或 `.venv\Scripts\activate` (Windows)
+  3. `pip install -r requirements.txt`
+- **依赖同步**：每当修改测试逻辑引入新库时，必须同步更新根目录的 `requirements.txt`。

@@ -1,0 +1,16 @@
+---
+alwaysApply: true
+description: 接口文档 docs/api.md 的编写规范
+globs: docs/api.md
+---
+# Markdown 结构要求
+每个接口必须包含：
+1. **接口名称与描述**
+2. **Method & URL**
+3. **请求参数 (Table)**：字段、类型、必填、说明。
+4. **成功响应示例 (JSON)**
+5. **错误码定义**：如 401 (未授权), 409 (用户已存在)。
+6. **Curl使用示例**: 针对每个接口的示例，必须生成对应的可执行的curl命令，以便用户可以快速在命令中验证。
+
+# 实时性
+- Agent 在修改 `handler` 代码后，必须自动 Check 并更新此文档。
