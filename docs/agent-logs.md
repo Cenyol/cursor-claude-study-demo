@@ -16,3 +16,16 @@
 - MySQL 连接池：MaxOpenConns=100, MaxIdleConns=20；Redis 用于 Session。
 - 在 `tests/conftest.py` 中提供 `api_client` fixture，并编写黑盒测试（正向 + 逆向）。
 - 对话提问已写入本文件（docs/agent-logs.md）。
+
+---
+
+## 2026-03-03
+
+### 提问原文
+
+> 深度分析代码，帮我生成一份完善的README.md文件，保存在项目根目录下
+
+### 执行摘要
+
+- 深度分析项目结构、DDD 四层、技术栈、API、数据库、测试。
+- 在项目根目录生成 README.md，包含：技术栈、项目结构（DDD 四层）、功能概览、快速开始（环境、配置、启动、cURL）、测试（Go 单元测试、Pytest 黑盒）、接口一览、数据库与连接池、规范与约定、文档索引。
