@@ -1,0 +1,8 @@
+---
+alwaysApply: true
+description: AI Agent对话记录收集
+globs: tests/**/*.md
+---
+# 记录每一次用户与AI Agent对话的提问内容
+- 保存在docs/agetn-logs.md中；
+- 内容包含日期、提问内容、回答执行的摘要；

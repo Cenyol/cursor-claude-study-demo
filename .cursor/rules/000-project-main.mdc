@@ -4,7 +4,7 @@ description: 项目全局架构、技术栈及目录规范
 globs: **/*
 ---
 # 技术栈约束 (核心)
-- **后端**: Go 1.22+, 框架 [Gin Gonic](https://gin-gonic.com), ORM 使用 [GORM](https://gorm.io)。
+- **后端**: Go 1.22+, 框架 [Gin Gonic](https://gin-gonic.com), ORM 使用 [GORM](https://gorm.io)，http监听端口号：8086。
 - **数据库**: MySQL 9.0, 缓存使用 Redis (用于 Session/Token)。
 - **测试**: Python 3.10+, [Pytest](https://docs.pytest.org), 异步请求使用 `httpx`。
 - **并发**: 必须处理高并发场景，使用连接池和 Redis 缓存。
