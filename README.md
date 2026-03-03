@@ -86,6 +86,13 @@ user-system/
 - Redis
 - Python 3.10+（仅运行/编写测试时需要）
 
+#### 持久化组件
+这一小段是人工(我)补充的！
+```
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:9
+docker run --name redis -p 6379:6379 -d redis:7.4-alpine
+```
+
 ### 1. 数据库与缓存
 
 ```bash
